@@ -166,7 +166,14 @@
             resultDiv.innerHTML = '';
 
             try {
-                const response = await fetch(`/api/${type}-limit`);
+                let url = `/api/${type}-limit`;
+                if (type === 'no-limit') {
+                    url = '/api/no-limit';
+                }
+
+                const response = await fetch(url, {
+                    headers: { 'Accept': 'application/json' }
+                });
                 const data = await response.json();
                 
                 // Get headers
